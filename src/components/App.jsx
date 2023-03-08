@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import fetchImages from 'api/fetch';
@@ -29,7 +29,7 @@ export function App() {
           if (hits.length === 0) {
             setImages(null);
             setTotalHits(0);
-            return toast.error(`There is no image with name ${searchInput}`);
+            return Promise.reject(toast.error(`There is no image with name ${searchInput}`));
           }
 
           const arrayOfImages = createArrayOfImages(hits);
@@ -51,7 +51,7 @@ export function App() {
         })
 
         .catch(error => {
-          toast.error('Sorry, something went wrong. Please try again later.')
+          console.log(`${error.message}`);
         })
 
         .finally(() => turnOffLoader());
