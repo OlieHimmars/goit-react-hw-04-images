@@ -15,6 +15,7 @@ export default function Searchbar({ onSubmit }) {
       return toast.error('Please enter search text');
     }
     onSubmit(searchInput);
+    setSearchInput('');
   };
     return (
       <header className={css.searchbar}>
